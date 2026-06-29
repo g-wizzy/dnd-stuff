@@ -1,7 +1,6 @@
 use std::{collections::HashSet, fs::read_to_string, path::PathBuf};
 
 use regex::Regex;
-use scraper::element_ref;
 use scraper::{Html, Selector};
 use serde::Deserialize;
 use serde::Serialize;
