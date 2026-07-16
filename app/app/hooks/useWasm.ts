@@ -5,10 +5,10 @@ export function useWasm() {
 
   useEffect(() => {
     async function load() {
-      const module = await import("@/pkg/dndlib");
+      const module = await import("@/pkg/dndlib.js");
       await module.default();
-      module.init();
       setWasm(module);
+      module.init();
     }
     load();
   }, []);

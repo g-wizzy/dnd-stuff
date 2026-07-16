@@ -1,17 +1,17 @@
 "use client";
 
-import { Class, Spell, SpellFilter } from "@/pkg/dndlib";
-import { MantineProvider, MultiSelect, TextInput } from "@mantine/core";
-import { useState } from "react";
-import SpellContainer from "./components/spell";
+import { Spell, SpellFilter } from "@/pkg/dndlib";
+import { MantineProvider } from "@mantine/core";
+import { useEffect, useState } from "react";
+import SpellShort from "./components/spell_short";
 import { useWasm } from "./hooks/useWasm";
+import Filter from "./components/filter";
 
 export default function Home() {
 
   const wasm = useWasm();
-  const [spells, setSpells] = useState<Array<Spell>>([]);
 
-  const [filter, _setFilter] = useState<SpellFilter>({
+  const [filter, setFilter] = useState<SpellFilter>({
     search: null,
     level: null,
     action_type: null,
@@ -26,29 +26,20 @@ export default function Home() {
     duration_type: null,
     concentration: null
   })
+  const [spells, setSpells] = useState<Array<Spell>>([]);
 
-  const setFilter = (value) => {
-    _setFilter(value);
+  useEffect(() => {
     if (!wasm) return;
     setSpells(wasm.get_spells(filter));
-  }
+    console.log(filter)
+  }, [wasm, filter]);
 
   return (
     <MantineProvider>
-      <TextInput label="name" onChange={(event) => {
-        setFilter((filter) => ({
-          ...filter,
-          ...{ "search": event.target.value }
-        }))
-      }} />
-      <MultiSelect<Class>
-        label="Classes"
-        data={["Bard", "Cleric", "Druid", "Paladin", "Ranger", "Sorcerer", "Warlock", "Wizard", "Artificer"]}
-      />
-
+      <Filter filter={filter} setFilter={setFilter} />
       {
         spells.map(spell => (
-          <SpellContainer spell={spell} key={spell.name} />
+          <SpellShort spell={spell} key={spell.name} />
         ))
       }
     </MantineProvider>

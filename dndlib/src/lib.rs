@@ -39,3 +39,12 @@ pub fn get_spells(filter: Ts<SpellFilter>) -> Vec<Ts<Spell>> {
         .map(|spell| spell.into_ts().unwrap())
         .collect()
 }
+
+#[wasm_bindgen(typescript_custom_section)]
+const TS_APPEND: &str = r#"
+export interface PLuginApi {
+    init(config: Record<string, unknown>): Promise<void>;
+    process(data: Uint8Array): Promise<Uint8Array>;
+    destroy(): void;
+}
+"#;
