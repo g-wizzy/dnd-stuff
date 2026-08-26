@@ -35,8 +35,8 @@ pub enum TimeUnit {
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[wasm_bindgen]
 pub struct TimedDuration {
-    value: u8,
-    unit: TimeUnit,
+    pub value: u8,
+    pub unit: TimeUnit,
 }
 
 impl Duration {

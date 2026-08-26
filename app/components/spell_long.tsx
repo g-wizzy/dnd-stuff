@@ -1,12 +1,12 @@
 import { Spell } from "@/pkg/dndlib";
 import { Stack } from "@mantine/core";
-import { ActionTypeToFrench, ClassToFrench } from "../lib/translation_tables";
+import { ActionTypeToFrench, ClassToFrench, DurationToFrench, MagicSchoolToFrench, RangeToFrench } from "../lib/translation_tables";
 
 export default function SpellLong({ spell }: { spell: Spell }) {
   return <Stack>
     <h1>{spell.name}</h1>
     <p>
-      {spell.school} de niveau {spell.level} (
+      {MagicSchoolToFrench(spell.school)} de niveau {spell.level} (
       {spell.classes.map(ClassToFrench).join(", ")}
       )
     </p>
@@ -18,7 +18,7 @@ export default function SpellLong({ spell }: { spell: Spell }) {
     </p>
     <p>
       <strong>Portée: </strong>
-
+      {RangeToFrench(spell.range)}
     </p>
     <p>
       <strong>Composantes: </strong>
@@ -28,11 +28,11 @@ export default function SpellLong({ spell }: { spell: Spell }) {
     </p>
     <p>
       <strong>Durée: </strong>
+      {DurationToFrench(spell.duration)}
     </p>
     <p>
       <strong>Description: </strong>
-      <div dangerouslySetInnerHTML={{ __html: spell.description }} />
-
+      <span dangerouslySetInnerHTML={{ __html: spell.description }} />
     </p>
   </Stack>
 }
