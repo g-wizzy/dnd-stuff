@@ -53,9 +53,9 @@ export default function Filter({ filter, setFilter }: FilterProps) {
           ...{ "search": event.target.value }
         })
       }} />
-      <Affix position={{ bottom: 30, right: 20 }} onClick={open}>
-        <ActionIcon size="xl" radius="xl">
-          <FunnelIcon />
+      <Affix position={{ bottom: 50, right: 40 }} onClick={open}>
+        <ActionIcon size={120} radius={60}>
+          <FunnelIcon size={60} />
         </ActionIcon>
       </Affix>
       <Drawer opened={opened} onClose={close} title="Filtres">
