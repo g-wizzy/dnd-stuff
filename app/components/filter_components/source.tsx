@@ -6,14 +6,15 @@ import FilterContainer from "../ui/filter_container";
 interface FilterSourceProps {
   sourceFilter: SourceFilter;
   setSourceFilter: (sourceFilter: SourceFilter) => void;
+  onDelete: () => void;
 }
 
-export default function FilterSource({ sourceFilter, setSourceFilter }: FilterSourceProps) {
+export default function FilterSource({ sourceFilter, setSourceFilter, onDelete }: FilterSourceProps) {
   const setSourceFilterFromSelect = (sources: Source[]) => {
     setSourceFilter({ sources: sources });
   };
 
-  return <FilterContainer name="Source">
+  return <FilterContainer name="Source" onClose={onDelete}>
     <MultiSelect<Source>
       label="Sources"
       data={SOURCES_FRENCH}

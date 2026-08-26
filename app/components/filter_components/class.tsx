@@ -7,13 +7,14 @@ import FilterContainer from "../ui/filter_container";
 interface FilterClassProps {
   classFilter: ClassFilter,
   setClassFilter: (classFilter: ClassFilter) => void;
+  onDelete: () => void;
 };
 
-export default function FilterClass({ classFilter, setClassFilter }: FilterClassProps) {
+export default function FilterClass({ classFilter, setClassFilter, onDelete }: FilterClassProps) {
   const setClassFilterFromSelect = (classes: Class[]) => {
     setClassFilter({ classes: classes });
   }
-  return <FilterContainer name="Classe">
+  return <FilterContainer name="Classe" onClose={onDelete}>
     <MultiSelect<Class>
       data={CLASSES_FRENCH}
       value={classFilter.classes}

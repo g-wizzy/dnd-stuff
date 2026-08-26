@@ -5,9 +5,10 @@ import FilterContainer from "../ui/filter_container";
 interface FilterComponentsProps {
   componentsFilter: ComponentsFilter;
   setComponentsFilter: (componentsFilter: ComponentsFilter) => void;
+  onDelete: () => void;
 }
 
-export default function FilterComponents({ componentsFilter, setComponentsFilter }: FilterComponentsProps) {
+export default function FilterComponents({ componentsFilter, setComponentsFilter, onDelete }: FilterComponentsProps) {
   const setVerbalComponentFilter = (value: boolean | null) => {
     setComponentsFilter({ ...componentsFilter, ...{ verbal: value } });
   };
@@ -18,7 +19,7 @@ export default function FilterComponents({ componentsFilter, setComponentsFilter
     setComponentsFilter({ ...componentsFilter, ...{ material: value } });
   };
 
-  return <FilterContainer name="Composantes">
+  return <FilterContainer name="Composantes" onClose={onDelete}>
     <NullableBool
       textForTrue="Verbal"
       textForNull="Les deux"

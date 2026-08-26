@@ -1,10 +1,10 @@
-import { Group, Paper, Stack, Title } from "@mantine/core";
+import { Group, Paper, Stack, Title, UnstyledButton } from "@mantine/core";
 import { XIcon } from "@phosphor-icons/react";
 import { ReactNode } from "react";
 
 interface FilterContainerProps {
   name: string;
-  onClose: () => void;
+  onClose: (() => void) | null;
   children: ReactNode;
 }
 
@@ -14,11 +14,16 @@ export default function FilterContainer({ name, onClose, children }: FilterConta
     p={12}
   >
     <Stack>
-      <Group>
+      <Group justify="space-between">
         <Title order={4}>
           {name}
         </Title>
-        <XIcon onClick={onClose} />
+        {
+          onClose &&
+          <UnstyledButton onClick={onClose}>
+            <XIcon onClick={onClose} />
+          </UnstyledButton>
+        }
       </Group>
       {children}
     </Stack>

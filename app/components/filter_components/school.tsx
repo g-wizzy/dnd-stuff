@@ -6,9 +6,10 @@ import FilterContainer from "../ui/filter_container";
 interface FilterMagicSchoolProps {
   magicSchoolFilter: MagicSchoolFilter;
   setMagicSchoolFilter: (magicSchoolFilter: MagicSchoolFilter) => void;
+  onDelete: () => void;
 }
 
-export default function FilterMagicSchool({ magicSchoolFilter, setMagicSchoolFilter }: FilterMagicSchoolProps) {
+export default function FilterMagicSchool({ magicSchoolFilter, setMagicSchoolFilter, onDelete }: FilterMagicSchoolProps) {
   const setMagicSchoolFilterFromSelect = (magicSchools: MagicSchool[]) => {
     setMagicSchoolFilter({
       ...magicSchoolFilter,
@@ -16,7 +17,7 @@ export default function FilterMagicSchool({ magicSchoolFilter, setMagicSchoolFil
     });
   };
 
-  return <FilterContainer name="École de magie">
+  return <FilterContainer name="École de magie" onClose={onDelete}>
     <MultiSelect<MagicSchool>
       data={MAGIC_SCHOOLS_FRENCH}
       value={magicSchoolFilter.schools}

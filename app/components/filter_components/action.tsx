@@ -7,9 +7,10 @@ import FilterContainer from "../ui/filter_container";
 interface FilterActionProps {
   actionFilter: ActionFilter,
   setActionFilter: (actionFilter: ActionFilter) => void;
+  onDelete: () => void;
 }
 
-export default function FilterAction({ actionFilter, setActionFilter }: FilterActionProps) {
+export default function FilterAction({ actionFilter, setActionFilter, onDelete }: FilterActionProps) {
   const setActionFilterFromSelect = (actionTypes: ActionType[]) => {
     setActionFilter({
       ...actionFilter,
@@ -22,7 +23,7 @@ export default function FilterAction({ actionFilter, setActionFilter }: FilterAc
       ...{ ritual: value }
     })
   }
-  return <FilterContainer name="Incantation">
+  return <FilterContainer name="Incantation" onClose={onDelete}>
     <MultiSelect<ActionType>
       data={ACTION_TYPES_FRENCH}
       value={actionFilter.action_types}

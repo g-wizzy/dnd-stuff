@@ -5,16 +5,17 @@ import FilterContainer from "../ui/filter_container";
 interface FilterLevelProps {
   level: LevelFilter;
   setLevel: (levelFilter: LevelFilter) => void;
+  onDelete: () => void;
 };
 
-export default function FilterLevel({ level, setLevel }: FilterLevelProps) {
+export default function FilterLevel({ level, setLevel, onDelete }: FilterLevelProps) {
   const setLevelFromSlider = (values: [number, number]) => {
     setLevel({
       min: values[0],
       max: values[1]
     });
   }
-  return <FilterContainer name="Niveau">
+  return <FilterContainer name="Niveau" onClose={onDelete}>
     <RangeSlider
       value={[level.min, level.max]}
       onChange={setLevelFromSlider}
