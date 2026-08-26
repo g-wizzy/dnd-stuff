@@ -31,7 +31,8 @@ export default function SpellLong({ spell }: { spell: Spell }) {
     </p>
     <p>
       <strong>Description: </strong>
-      {spell.description}
+      <div dangerouslySetInnerHTML={{ __html: spell.description }} />
+
     </p>
   </Stack>
 }
